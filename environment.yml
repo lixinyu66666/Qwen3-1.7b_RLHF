@@ -1,0 +1,29 @@
+name: qwen3finetune
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - ipykernel
+  - numpy
+  - pandas
+  - pytorch
+  - torchvision
+  - torchaudio
+  - accelerate
+  - transformers
+  - peft
+  - bitsandbytes
+  - datasets
+  - deepspeed
+  - tqdm
+  - sentencepiece
+  - protobuf
+  - typing-extensions
+  - pip:
+      - flash-attn
+      - trl
+      - einops
+      - wandb
+      - evaluate
