@@ -1,0 +1,13 @@
+{
+  "output_dir": "checkpoints/qwen3_lora",
+  "per_device_train_batch_size": 2,
+  "gradient_accumulation_steps": 4,
+  "num_train_epochs": 3,
+  "learning_rate": 2e-5,
+  "logging_dir": "logs",
+  "save_steps": 500,
+  "logging_steps": 50,
+  "fp16": true,
+  "save_total_limit": 2,
+  "report_to": "none"
+}

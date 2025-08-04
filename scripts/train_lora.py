@@ -3,13 +3,14 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments,
 from datasets import load_dataset, Dataset
 from peft import get_peft_model, LoraConfig, TaskType, prepare_model_for_kbit_training
 from transformers import BitsAndBytesConfig
+from prompt_template import format_prompt
 import json
 
 def load_data(path):
     with open(path, 'r') as f:
         lines = [json.loads(line) for line in f]
     
-    return [{"text": f"### Instruction:\n{l['instruction']}\n\n### Response:\n{l['response']}"} for l in lines]
+    return [{"text": format_prompt(l['instruction'], l['response'])} for l in lines]
 
 def tokenize(examples):
     return tokenizer(examples['text'], truncation=True, padding='max_length', max_length=512)
@@ -44,31 +45,15 @@ model = AutoModelForCausalLM.from_pretrained(
 model.gradient_checkpointing_enable()
 model = prepare_model_for_kbit_training(model)
 
-peft_config = LoraConfig(
-    r=8,
-    lora_alpha=16,
-    target_modules=["q_proj", "v_proj"],
-    lora_dropout=0.05,
-    bias="none",
-    task_type=TaskType.CAUSAL_LM,
-)
-
+with open("configs/lora_config.json", "r") as f:
+    lora_dict = json.load(f)
+    lora_dict['task_type'] = TaskType[lora_dict['task_type']]
+peft_config = LoraConfig(**lora_dict)
 model = get_peft_model(model, peft_config)
 
-# Training arguments
-training_args = TrainingArguments(
-    output_dir="checkpoints/qwen3_lora",
-    per_device_train_batch_size=2,
-    gradient_accumulation_steps=4,
-    num_train_epochs=3,
-    learning_rate=2e-5,
-    logging_dir="logs",
-    save_steps=500,
-    logging_steps=50,
-    fp16=True,
-    save_total_limit=2,
-    report_to="none",
-)
+with open("configs/training_args.json", "r") as f:
+    training_args_dict = json.load(f)
+training_args = TrainingArguments(**training_args_dict)
 
 # Trainer setup
 trainer = Trainer(

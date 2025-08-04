@@ -2,3 +2,4 @@
 /data/sharegpt_qa.json
 /checkpoints/qwen3_lora
 nohup.out
+/scripts/__pycache__

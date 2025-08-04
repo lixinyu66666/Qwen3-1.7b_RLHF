@@ -27,3 +27,6 @@ dependencies:
       - einops
       - wandb
       - evaluate
+      - nltk
+      - rouge_score
+      - absl-py
