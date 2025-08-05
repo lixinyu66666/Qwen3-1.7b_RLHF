@@ -92,14 +92,22 @@ python scripts/eval.py
 ### LoRA Configuration (`configs/lora_config.json`)
 ```json
 {
-  "r": 8,                    // LoRA rank
-  "lora_alpha": 16,          // LoRA scaling parameter
-  "target_modules": ["q_proj", "v_proj"],  // Target modules
-  "lora_dropout": 0.05,      // Dropout rate
-  "bias": "none",            // Bias setting
-  "task_type": "CAUSAL_LM"   // Task type
+  "r": 8,
+  "lora_alpha": 16,
+  "target_modules": ["q_proj", "v_proj"],
+  "lora_dropout": 0.05,
+  "bias": "none",
+  "task_type": "CAUSAL_LM"
 }
 ```
+
+**Parameter descriptions:**
+- `r`: LoRA rank (controls the dimension of low-rank matrices)
+- `lora_alpha`: LoRA scaling parameter (affects the strength of adaptation)
+- `target_modules`: Target modules to apply LoRA (attention projection layers)
+- `lora_dropout`: Dropout rate for LoRA layers
+- `bias`: Bias setting for LoRA adaptation
+- `task_type`: Task type for the model (causal language modeling)
 
 ### Training Configuration (`configs/training_args.json`)
 Key parameters:
