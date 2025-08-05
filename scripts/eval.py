@@ -24,18 +24,19 @@ def load_model(base_model_name, bnb_config, lora_path, load_lora=True):
     model.eval()
     return model
 
-def generate_response(instruction, model, tokenizer, max_new_tokens=512):
+def generate_response(instruction, model, tokenizer, max_new_tokens=128):
     prompt = format_prompt(instruction, "")
     inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
 
     with torch.no_grad():
-        outputs = model.generate(
-            input_ids=inputs['input_ids'],
-            attention_mask=inputs['attention_mask'],
-            max_new_tokens=max_new_tokens,
-            do_sample=False,
-            eos_token_id=tokenizer.eos_token_id,
-        )
+        with torch.amp.autocast(device_type="cuda"):
+            outputs = model.generate(
+                input_ids=inputs['input_ids'],
+                attention_mask=inputs['attention_mask'],
+                max_new_tokens=max_new_tokens,
+                do_sample=False,
+                eos_token_id=tokenizer.eos_token_id,
+            )
     
     output_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
     response = output_text.split("### Response:")[-1].strip()
@@ -47,8 +48,8 @@ def evaluate_model(model, eval_data, metrics, name=""):
 
     for item in tqdm(eval_data, desc=f"Evaluating {name}"):
         pred = generate_response(item['instruction'], model, tokenizer)
-        predictions.append([pred.strip()])
-        references.append([[item['response'].strip()]])
+        predictions.append(pred.strip())
+        references.append(item['response'].strip())
     
     if 'bleu' in metrics:
         bleu_scores = bleu.compute(predictions=predictions, references=references)
@@ -65,7 +66,7 @@ def evaluate_model(model, eval_data, metrics, name=""):
 base_model_name = "Qwen/Qwen3-1.7B"
 lora_path = "checkpoints/qwen3_lora/checkpoint-2103"
 eval_data_path = "data/sharegpt_qa.json"
-max_new_tokens = 512
+max_new_tokens = 128
 
 tokenizer = AutoTokenizer.from_pretrained(base_model_name, trust_remote_code=True)
 tokenizer.pad_token = tokenizer.eos_token
