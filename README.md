@@ -187,8 +187,8 @@ Using 1000 Q&A questions from the sharegpt dataset as the test set, the followin
     </tr>
   </thead>
   <tbody>
-    <tr><td style="text-align:left;">Qwen3-1.7b</td>             <td>0.0120</td><td>0.0776</td><td>0.0973</td><td>0.1338</td><td>0.0432</tr>
-    <tr><td style="text-align:left;">Qwen3-1.7b sharegpt finetune</td>         <td><strong>0.0134</strong></td><td><strong>0.1370</strong></td><td><strong>0.1254</strong></td><td><strong>0.1846</strong></td><td><strong>0.0660</strong></td></tr>
+    <tr><td style="text-align:left;">Qwen3-1.7b</td>             <td>0.0322</td><td>0.1637</td><td>0.1780</td><td>0.2678</td><td>0.0944</tr>
+    <tr><td style="text-align:left;">Qwen3-1.7b sharegpt finetune</td>         <td><strong>0.0432</strong></td><td><strong>0.1885</strong></td><td><strong>0.2060</strong></td><td><strong>0.3043</strong></td><td><strong>0.1198</strong></td></tr>
     
   </tbody>
 </table>
