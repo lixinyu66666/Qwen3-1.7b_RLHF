@@ -212,7 +212,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you have any questions or suggestions, please contact us through:
 - GitHub Issues: [Project Issues](https://github.com/lixinyu66666/Qwen3-1.5b_finetune_sharegpt/issues)
-- Email: lixinyu66666@gmail.com
+- Email: lixinyu020620@gmail.com
 
 ---
 If this project helps you, please give it a Star!
