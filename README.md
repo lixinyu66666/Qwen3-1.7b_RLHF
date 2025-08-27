@@ -1,4 +1,4 @@
-# Qwen3-1.7B LoRA Fine-tuning with ShareGPT
+# Qwen3-1.7B Reinforcement Learning from Human Feedback
 
 A LoRA fine-tuning project for Qwen3-1.7B model using ShareGPT format data for instruction tuning.
 

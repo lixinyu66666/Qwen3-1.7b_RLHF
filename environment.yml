@@ -1,4 +1,4 @@
-name: qwen3finetune
+name: qwen3rlhf
 channels:
   - defaults
   - conda-forge
