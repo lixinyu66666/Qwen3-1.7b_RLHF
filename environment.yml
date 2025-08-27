@@ -32,3 +32,4 @@ dependencies:
       - absl-py
       - huggingface_hub==0.34.1
       - tensorboard
+      - matplotlib
