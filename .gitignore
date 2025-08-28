@@ -3,4 +3,6 @@
 /checkpoints/qwen3_lora
 nohup.out
 /scripts/__pycache__
-reward_model/
+/checkpoints/qwen3_ppo
+/checkpoints/reward_model
+trainer_output/

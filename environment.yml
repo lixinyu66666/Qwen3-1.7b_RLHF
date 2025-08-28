@@ -33,3 +33,4 @@ dependencies:
       - huggingface_hub==0.34.1
       - tensorboard
       - matplotlib
+      - trl

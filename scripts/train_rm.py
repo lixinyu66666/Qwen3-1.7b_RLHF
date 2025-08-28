@@ -113,8 +113,8 @@ def train_reward_model():
 
     # Step 6: Train and save model
     trainer.train()
-    trainer.save_model("./reward_model")
-    tokenizer.save_pretrained("./reward_model")
+    trainer.save_model("checkpoints/reward_model")
+    tokenizer.save_pretrained("checkpoints/reward_model")
 
 if __name__ == "__main__":
     train_reward_model()
